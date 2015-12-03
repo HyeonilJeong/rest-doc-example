@@ -25,11 +25,13 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "classpath:context-configuration/*-context.xml" })
 @WebAppConfiguration
-public class EmployeeAPIDocument {
+public class EmployeeAPIDocument extends WebMvcConfigurerAdapter {
 
 	@Rule
 	public final RestDocumentation restDocumentation = new RestDocumentation("target/generated-snippets");
@@ -42,7 +44,8 @@ public class EmployeeAPIDocument {
 	@Before
 	public void setUp() {
 		// @formatter:off
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context).defaultRequest(get("/").contextPath("/rest-doc-example"))
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
+				.defaultRequest(get("/").contextPath("/rest-doc-example"))
 				.apply(
 					documentationConfiguration(this.restDocumentation)
 					.uris()
@@ -52,7 +55,7 @@ public class EmployeeAPIDocument {
 				).build();
 		// @formatter:on
 	}
-	
+
 	@Test
 	public void getAllEmployeeExample() throws Exception {
 		// @formatter:off
@@ -72,7 +75,7 @@ public class EmployeeAPIDocument {
 			));
 		// @formatter:on
 	}
-	
+
 	@Test
 	public void getSearchEmployeeByNameExample() throws Exception {
 		// @formatter:off
