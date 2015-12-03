@@ -7,6 +7,8 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -40,19 +42,47 @@ public class EmployeeAPIDocument {
 	@Before
 	public void setUp() {
 		// @formatter:off
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
-				.apply(documentationConfiguration(this.restDocumentation))
-				.build();
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context).defaultRequest(get("/").contextPath("/rest-doc-example"))
+				.apply(
+					documentationConfiguration(this.restDocumentation)
+					.uris()
+					.withScheme("http")
+					.withHost("your.domain.com")
+					.withPort(80)
+				).build();
 		// @formatter:on
 	}
 	
 	@Test
 	public void getAllEmployeeExample() throws Exception {
 		// @formatter:off
-		this.mockMvc.perform(get("/employee/allEmployeeList"))
+		this.mockMvc.perform(get("/rest-doc-example/employee/allEmployeeList"))
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("data.employeeList", is(notNullValue())))
 			.andDo(document("all_employee_list",
+				responseFields(
+					fieldWithPath("message").type(JsonFieldType.STRING).description("message"),
+					fieldWithPath("data").type(JsonFieldType.OBJECT).description("data object"),
+					fieldWithPath("data.employeeList").type(JsonFieldType.ARRAY).description("employee list"),
+					fieldWithPath("data.employeeList[].employeeNo").type(JsonFieldType.NUMBER).description("unique number of employee"),
+					fieldWithPath("data.employeeList[].name").type(JsonFieldType.STRING).description("employee name"),
+					fieldWithPath("data.employeeList[].dept").type(JsonFieldType.STRING).description("employee department"),
+					fieldWithPath("data.employeeList[].age").type(JsonFieldType.NUMBER).description("employee age")
+				)
+			));
+		// @formatter:on
+	}
+	
+	@Test
+	public void getSearchEmployeeByNameExample() throws Exception {
+		// @formatter:off
+		this.mockMvc.perform(get("/rest-doc-example/employee/searchEmployeeByName?name=el"))
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("data.employeeList", is(notNullValue())))
+			.andDo(document("search_employee_by_name",
+				requestParameters(
+					parameterWithName("name").description("some letters of the name")
+				),
 				responseFields(
 					fieldWithPath("message").type(JsonFieldType.STRING).description("message"),
 					fieldWithPath("data").type(JsonFieldType.OBJECT).description("data object"),

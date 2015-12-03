@@ -66,9 +66,6 @@ use of HTTP status codes.
 === Get all employee data
 more description
 
-==== Request structure
-include::{snippets}/all_employee_list/request-parameters.adoc[]
-
 ==== Example request
 include::{snippets}/all_employee_list/http-request.adoc[]
 include::{snippets}/all_employee_list/curl-request.adoc[]
@@ -78,3 +75,20 @@ include::{snippets}/all_employee_list/response-fields.adoc[]
 
 ==== Example response
 include::{snippets}/all_employee_list/http-response.adoc[]
+
+[[resources-search-employee-by-name]]
+=== Search employee by name
+more description
+
+==== Request structure
+include::{snippets}/search_employee_by_name/request-parameters.adoc[]
+
+==== Example request
+include::{snippets}/search_employee_by_name/http-request.adoc[]
+include::{snippets}/search_employee_by_name/curl-request.adoc[]
+
+==== Response structure
+include::{snippets}/search_employee_by_name/response-fields.adoc[]
+
+==== Example response
+include::{snippets}/search_employee_by_name/http-response.adoc[]

@@ -2,12 +2,21 @@ package xyz.nuti.rest.dao.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
 import xyz.nuti.rest.dao.EmployeeDAO;
 import xyz.nuti.rest.vo.EmployeeVO;
 
+/**
+ * This is not DAO implementation.
+ * No database connection.
+ * Static data is used for simple example of REST document. 
+ * 
+ * @author Hyeonil Jeong
+ *
+ */
 @Repository
 public class EmployeeDAOImpl implements EmployeeDAO {
 	@Override
@@ -15,6 +24,20 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		Collection<EmployeeVO> employeeList = initialEmployeeList();
 		
 		return employeeList;
+	}
+	
+	@Override
+	public Collection<EmployeeVO> searchEmployeeByName(String name) {
+		Collection<EmployeeVO> employeeList = initialEmployeeList();
+		Collection<EmployeeVO> searchEmployeeList = null;
+		
+		// @formatter:off
+		searchEmployeeList = employeeList.stream()
+			.filter(employee -> employee.getName().contains(name))
+			.collect(Collectors.toList());
+		// @formatter:on
+		
+		return searchEmployeeList;
 	}
 	
 	public Collection<EmployeeVO> initialEmployeeList() {

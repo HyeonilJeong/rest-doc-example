@@ -6,4 +6,5 @@ import xyz.nuti.rest.vo.EmployeeVO;
 
 public interface EmployeeDAO {
 	Collection<EmployeeVO> getAllEmployeeList();
+	Collection<EmployeeVO> searchEmployeeByName(String name);
 }
