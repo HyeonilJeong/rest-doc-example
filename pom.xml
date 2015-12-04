@@ -188,7 +188,7 @@
 		<finalName>${project.artifactId}-${project.version}</finalName>
 		<testResources>
 			<testResource>
-				<directory>src/main/webapp/WEB-INF/spring/appServlet</directory>
+				<directory>src/main/webapp/WEB-INF/spring</directory>
 			</testResource>
 			<testResource>
 				<directory>src/main/resources</directory>

@@ -1,4 +1,5 @@
 ## rest-doc-example
+This is spring REST document example with Asciidoctor.
 
 ### Goals
 1. mvn clean install asciidoctor:process-asciidoc resources:testResources -e -X

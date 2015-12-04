@@ -28,7 +28,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({ "classpath:*-context.xml" })
+@ContextConfiguration({ "classpath:**/*-context.xml" })
 @WebAppConfiguration
 public class EmployeeAPIDocument {
 
