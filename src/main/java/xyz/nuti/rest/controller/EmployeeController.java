@@ -36,7 +36,7 @@ public class EmployeeController {
 			body.put("employeeList", employeeList);
 			httpStatus = HttpStatus.OK;
 		} catch (EmployeeNotFoundException e) {
-			body.setMessage("not found");
+			body.setMessage(e.getMessage());
 			httpStatus = HttpStatus.NOT_FOUND;
 		}
 
@@ -53,14 +53,15 @@ public class EmployeeController {
 
 		try {
 			Collection<EmployeeVO> employeeList = employeeService.searchEmployeeByName(name);
+			
 			body.setMessage("ok");
 			body.put("employeeList", employeeList);
 			httpStatus = HttpStatus.OK;
 		} catch (IncorrectedParameterException e) {
-			body.setMessage("incorrected parameter");
+			body.setMessage(e.getMessage());
 			httpStatus = HttpStatus.BAD_REQUEST;
 		} catch (EmployeeNotFoundException e) {
-			body.setMessage("employee not found");
+			body.setMessage(e.getMessage());
 			httpStatus = HttpStatus.NOT_FOUND;
 		}
 
