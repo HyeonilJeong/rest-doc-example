@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import xyz.nuti.rest.dao.EmployeeDAO;
 import xyz.nuti.rest.exception.EmployeeNotFoundException;
-import xyz.nuti.rest.exception.IncorrectedParameterException;
+import xyz.nuti.rest.exception.InvalidParameterException;
 import xyz.nuti.rest.service.EmployeeService;
 import xyz.nuti.rest.vo.EmployeeVO;
 
@@ -29,9 +29,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 	
 	@Override
-	public Collection<EmployeeVO> searchEmployeeByName(String name) throws IncorrectedParameterException, EmployeeNotFoundException {
+	public Collection<EmployeeVO> searchEmployeeByName(String name) throws InvalidParameterException, EmployeeNotFoundException {
 		if (name == null || name.equals("")) {
-			throw new IncorrectedParameterException(name);
+			throw new InvalidParameterException(name);
 		}
 		
 		Collection<EmployeeVO> employeeList = employeeDAO.searchEmployeeByName(name);

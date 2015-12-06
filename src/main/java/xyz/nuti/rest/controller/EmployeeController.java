@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import xyz.nuti.rest.common.RestfulResponseBody;
 import xyz.nuti.rest.exception.EmployeeNotFoundException;
-import xyz.nuti.rest.exception.IncorrectedParameterException;
+import xyz.nuti.rest.exception.InvalidParameterException;
 import xyz.nuti.rest.service.EmployeeService;
 import xyz.nuti.rest.vo.EmployeeVO;
 
@@ -57,7 +57,7 @@ public class EmployeeController {
 			body.setMessage("ok");
 			body.put("employeeList", employeeList);
 			httpStatus = HttpStatus.OK;
-		} catch (IncorrectedParameterException e) {
+		} catch (InvalidParameterException e) {
 			body.setMessage(e.getMessage());
 			httpStatus = HttpStatus.BAD_REQUEST;
 		} catch (EmployeeNotFoundException e) {
