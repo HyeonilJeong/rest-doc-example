@@ -1,13 +1,13 @@
 package xyz.nuti.rest.exception;
 
-public class IncorrectedParameterException extends DefaultException {
+public class InvalidParameterException extends DefaultException {
 	private static final long serialVersionUID = 8233668378604782747L;
 
-	public IncorrectedParameterException() {
+	public InvalidParameterException() {
 		super();
 	}
 	
-	public IncorrectedParameterException(String parameter) {
+	public InvalidParameterException(String parameter) {
 		super((parameter == null ? "null" : parameter) + " is not allowed parameter.");
 	}
 }
