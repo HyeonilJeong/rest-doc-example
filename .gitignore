@@ -4,4 +4,4 @@ target/
 .classpath
 .project
 .springBeans
-spring-doc-example.iml
+rest-doc-example.iml
